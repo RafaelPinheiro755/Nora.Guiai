@@ -1,9 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
 
-const API_KEY = process.env.API_KEY || '';
-
-const ai = new GoogleGenAI({ apiKey: API_KEY });
-
 const SYSTEM_INSTRUCTION = `
 You are Nora, a sophisticated, elegant, and knowledgeable local guide for Dubai. 
 You were created by flight attendants Aurea and Valeria.
@@ -15,10 +11,15 @@ You represent the brand "NORA.GUIAi".
 
 export const sendMessageToGemini = async (message: string): Promise<string> => {
   try {
-    if (!API_KEY) {
-      // Fallback for demo purposes if no key is present in environment
-      return "Olá! Eu sou a Nora. Para ativar minha inteligência completa, por favor configure a chave de API. Por enquanto, posso dizer que Dubai é maravilhosa nesta época do ano! 🇦🇪";
+    // In Vercel deployment, ensure 'API_KEY' is set in your Project Settings > Environment Variables
+    const apiKey = process.env.API_KEY;
+    
+    if (!apiKey) {
+      console.error("API Key is missing. Please set API_KEY in your environment variables.");
+      return "Olá! Sou a Nora. Meu sistema de inteligência está aguardando configuração. Se você é o administrador, por favor configure a variável de ambiente API_KEY no painel da Vercel.";
     }
+
+    const ai = new GoogleGenAI({ apiKey });
 
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',

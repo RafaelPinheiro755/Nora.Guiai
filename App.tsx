@@ -5,7 +5,6 @@ import {
   Coins, UserCheck, Plane, Image as ImageIcon, CalendarClock, Palmtree,
   Umbrella, Utensils, Ticket, ShoppingBag, Music
 } from 'lucide-react';
-import ChatDemo from './components/ChatDemo';
 import Button from './components/Button';
 import { PricingTier, PricingPlan } from './types';
 
@@ -225,7 +224,7 @@ function App() {
   ];
 
   return (
-    <div className="font-sans text-navy bg-cream min-h-screen selection:bg-gold selection:text-white">
+    <div className="font-sans text-navy bg-cream min-h-screen selection:bg-gold selection:text-white relative">
       
       {/* HERO SECTION */}
       <section 
@@ -276,7 +275,7 @@ function App() {
         </div>
       </section>
 
-      {/* INTRO & CHAT DEMO */}
+      {/* INTRO SECTION - REDESIGNED WITHOUT CHAT */}
       <section id="intro" className="py-24 px-6 bg-cream">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
@@ -285,39 +284,41 @@ function App() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            
+          <div className="max-w-4xl mx-auto">
             {/* Text Content */}
-            <div className="space-y-6 text-lg text-sepia">
-              <p>
+            <div className="space-y-8 text-lg text-sepia">
+              <p className="leading-relaxed">
                 Esqueça roteiros genéricos de blog e horas perdidas pesquisando. A Nora entende seu perfil em <strong className="text-navy">2 minutos</strong> — quem vai com você, seu estilo de viagem, onde vai ficar — e monta um roteiro completo em PDF, com rotas no Google Maps, restaurantes que valem cada dirham e os eventos que vão estar rolando exatamente quando você chegar.
               </p>
               
-              <div className="bg-sand/20 p-6 rounded-xl border-l-4 border-gold">
-                <p className="mb-2"><strong>Primeira vez em Dubai?</strong> Ela te guia pelos clássicos sem cair em armadilha de turista.</p>
-                <p><strong>Já conhece a cidade?</strong> Ela foge do óbvio e te leva pros lugares que só quem mora lá sabe.</p>
+              <div className="bg-sand/20 p-8 rounded-xl border-l-4 border-gold grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <p className="font-bold text-navy mb-2">Primeira vez em Dubai?</p>
+                  <p>Ela te guia pelos clássicos sem cair em armadilha de turista.</p>
+                </div>
+                <div>
+                  <p className="font-bold text-navy mb-2">Já conhece a cidade?</p>
+                  <p>Ela foge do óbvio e te leva pros lugares que só quem mora lá sabe.</p>
+                </div>
               </div>
 
-              <p>
+              <p className="leading-relaxed">
                 Quer trocar o jantar do dia 3 por um japonês? É só pedir. Quer saber se vale subir no Burj Khalifa ou se o Sky Views é melhor? Ela te conta a real.
               </p>
               
-              <p>
+              <p className="leading-relaxed">
                 E quando você chegar em Dubai, a Nora continua com você — te indica lugares baseado em onde você está, <strong className="text-navy">manda foto de qualquer local e ela cria um audioguia na hora</strong>, e te avisa em tempo real sobre eventos exclusivos que não estão em nenhum blog.
               </p>
               
-              <p className="font-serif italic text-navy text-xl">
-                Dubai do jeito que deveria ser: sem pesquisa, sem dúvida, só experiência.
-              </p>
-            </div>
-
-            {/* Interactive Chat Demo */}
-            <div className="w-full">
-              <ChatDemo />
+              <div className="text-center pt-8">
+                 <p className="font-serif italic text-navy text-2xl">
+                  "Dubai do jeito que deveria ser: sem pesquisa, sem dúvida, só experiência."
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Moved CTA Button - now below the chat/explanation grid */}
+          {/* CTA Button */}
           <div className="mt-16 text-center">
             <a href="#planos" className="inline-block hover:scale-105 transition-transform duration-300">
               <Button variant="primary" className="shadow-2xl px-12 py-5 text-lg">
