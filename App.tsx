@@ -256,10 +256,10 @@ function App() {
               <HeroPhone tip1={tip1} tip2={tip2} className="lg:hidden my-8" />
 
               <p className="text-lg md:text-xl text-sand border-l-4 border-gold pl-6 py-1 max-w-lg">
-                Esqueça roteiros genéricos e horas de pesquisa. A NORA.GUIAi planeja sua viagem ideal, reserva restaurantes secretos e te guia pelos Emirados via WhatsApp.
+                Esqueça roteiros genéricos. A Nora monta seu itinerário personalizado em minutos e continua com você durante a viagem: dicas em tempo real, audioguias por foto e eventos secretos que agência nenhuma te conta.
               </p>
               <div className="pt-4 flex flex-col sm:flex-row gap-4">
-                <a href="#planos">
+                <a href="#intro">
                   <Button>Começar Experiência</Button>
                 </a>
               </div>
@@ -277,7 +277,7 @@ function App() {
       </section>
 
       {/* INTRO & CHAT DEMO */}
-      <section className="py-24 px-6 bg-cream">
+      <section id="intro" className="py-24 px-6 bg-cream">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="font-serif text-4xl md:text-5xl text-navy mb-4">
@@ -290,15 +290,25 @@ function App() {
             {/* Text Content */}
             <div className="space-y-6 text-lg text-sepia">
               <p>
-                Esqueça roteiros genéricos de blog e horas perdidas pesquisando. A Nora entende seu perfil em <strong className="text-navy">2 minutos</strong> — quem vai com você, seu estilo de viagem, onde vai ficar — e monta um roteiro completo em PDF.
+                Esqueça roteiros genéricos de blog e horas perdidas pesquisando. A Nora entende seu perfil em <strong className="text-navy">2 minutos</strong> — quem vai com você, seu estilo de viagem, onde vai ficar — e monta um roteiro completo em PDF, com rotas no Google Maps, restaurantes que valem cada dirham e os eventos que vão estar rolando exatamente quando você chegar.
               </p>
-              <p>
-                Rotas no Google Maps, restaurantes que valem cada dirham e os eventos que vão estar rolando exatamente quando você chegar.
-              </p>
+              
               <div className="bg-sand/20 p-6 rounded-xl border-l-4 border-gold">
                 <p className="mb-2"><strong>Primeira vez em Dubai?</strong> Ela te guia pelos clássicos sem cair em armadilha de turista.</p>
                 <p><strong>Já conhece a cidade?</strong> Ela foge do óbvio e te leva pros lugares que só quem mora lá sabe.</p>
               </div>
+
+              <p>
+                Quer trocar o jantar do dia 3 por um japonês? É só pedir. Quer saber se vale subir no Burj Khalifa ou se o Sky Views é melhor? Ela te conta a real.
+              </p>
+              
+              <p>
+                E quando você chegar em Dubai, a Nora continua com você — te indica lugares baseado em onde você está, <strong className="text-navy">manda foto de qualquer local e ela cria um audioguia na hora</strong>, e te avisa em tempo real sobre eventos exclusivos que não estão em nenhum blog.
+              </p>
+              
+              <p className="font-serif italic text-navy text-xl">
+                Dubai do jeito que deveria ser: sem pesquisa, sem dúvida, só experiência.
+              </p>
             </div>
 
             {/* Interactive Chat Demo */}
