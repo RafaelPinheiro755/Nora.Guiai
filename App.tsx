@@ -5,6 +5,7 @@ import {
   Coins, UserCheck, Plane, Image as ImageIcon, CalendarClock, Palmtree,
   Umbrella, Utensils, Ticket, ShoppingBag, Music
 } from 'lucide-react';
+import ChatDemo from './components/ChatDemo';
 import Button from './components/Button';
 import { PricingTier, PricingPlan } from './types';
 
@@ -61,28 +62,28 @@ function App() {
   const heroTips = [
     {
       title: "Gold Souk",
-      desc: "Negocie sempre — comece oferecendo metade.",
+      desc: "Negocie sempre. Comece oferecendo metade do valor.",
       extra: "Manhã (menos lotado)",
       icon: ShoppingBag,
       position: "left"
     },
     {
       title: "Aquaventure",
-      desc: "Aniversariante entra grátis (leve RG).",
+      desc: "Aniversariante entra grátis. Não esqueça o RG.",
       extra: "09:45 às 18:30",
       icon: Ticket,
       position: "right"
     },
     {
       title: "Kite Beach",
-      desc: "Leve cadeira própria — aluguel limitado.",
+      desc: "Leve cadeira própria, pois o aluguel é limitado.",
       extra: "10h às 22h",
       icon: Umbrella,
       position: "left"
     },
     {
       title: "JBR Beach",
-      desc: "Shows de drone à noite no inverno.",
+      desc: "Shows de drone acontecem à noite no inverno.",
       extra: "Após 20h",
       icon: Sparkles,
       position: "right"
@@ -96,7 +97,7 @@ function App() {
     },
     {
       title: "Mina Brasserie",
-      desc: "Brunch La Vie en Rose — Top da cidade.",
+      desc: "Brunch La Vie en Rose. O top da cidade.",
       extra: "Sex e Sáb, 12h-16h",
       icon: Utensils,
       position: "right"
@@ -123,10 +124,10 @@ function App() {
       ctaText: "Começar Agora",
       isPopular: true,
       features: [
-        "Sem instalar nada: acesso direto e leve",
+        "Sem instalar nada, acesso direto e leve",
         "Atualizações automáticas inclusas",
         "Suporte humanizado via WhatsApp",
-        "Risco zero: garantia total de 7 dias"
+        "Risco zero com garantia total de 7 dias"
       ]
     },
     {
@@ -137,10 +138,10 @@ function App() {
       ctaText: "Assinar Semestral",
       bgColor: "bg-sand-dark",
       features: [
-        "Sem instalar nada: acesso direto e leve",
+        "Sem instalar nada, acesso direto e leve",
         "Atualizações automáticas inclusas",
         "Suporte humanizado via WhatsApp",
-        "Risco zero: garantia total de 30 dias"
+        "Risco zero com garantia total de 30 dias"
       ]
     },
     {
@@ -151,7 +152,7 @@ function App() {
       ctaText: "Falar com Consultor",
       bgColor: "bg-navy",
       features: [
-        "Sem instalar nada: acesso direto e leve",
+        "Sem instalar nada, acesso direto e leve",
         "Atualizações automáticas inclusas",
         "Suporte humanizado via WhatsApp",
         "Onboarding e treinamento de equipes",
@@ -218,7 +219,7 @@ function App() {
     },
     { 
       title: "Atrações Sazonais", 
-      desc: "Miracle Garden, Global Village, Ramadã — ela sabe o que abre em cada época.", 
+      desc: "Miracle Garden, Global Village, Ramadã. Ela sabe o que abre em cada época.", 
       icon: Palmtree 
     }
   ];
@@ -255,7 +256,7 @@ function App() {
               <HeroPhone tip1={tip1} tip2={tip2} className="lg:hidden my-8" />
 
               <p className="text-lg md:text-xl text-sand border-l-4 border-gold pl-6 py-1 max-w-lg">
-                Esqueça roteiros genéricos. A Nora monta seu itinerário personalizado em minutos e continua com você durante a viagem: dicas em tempo real, audioguias por foto e eventos secretos que agência nenhuma te conta.
+                Esqueça roteiros genéricos. A Nora monta seu itinerário personalizado em minutos e continua com você durante a viagem. Dicas em tempo real, audioguias por foto e eventos secretos que agência nenhuma te conta.
               </p>
               <div className="pt-4 flex flex-col sm:flex-row gap-4">
                 <a href="#intro">
@@ -284,38 +285,53 @@ function App() {
             </h2>
           </div>
 
-          <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
             {/* Text Content */}
             <div className="space-y-8 text-lg text-sepia">
               <p className="leading-relaxed">
-                Esqueça roteiros genéricos de blog e horas perdidas pesquisando. A Nora entende seu perfil em <strong className="text-navy">2 minutos</strong> — quem vai com você, seu estilo de viagem, onde vai ficar — e monta um roteiro completo em PDF, com rotas no Google Maps, restaurantes que valem cada dirham e os eventos que vão estar rolando exatamente quando você chegar.
+                Esqueça roteiros genéricos de blog e horas perdidas pesquisando. A Nora entende seu perfil em 2 minutos. Quem vai com você, seu estilo de viagem, onde vai ficar. E monta um roteiro completo em PDF, com rotas no Google Maps, restaurantes que valem cada dirham e os eventos que vão estar rolando exatamente quando você chegar.
               </p>
               
-              <div className="bg-sand/20 p-8 rounded-xl border-l-4 border-gold grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-sand/20 p-8 rounded-xl border-l-4 border-gold grid grid-cols-1 gap-6">
                 <div>
-                  <p className="font-bold text-navy mb-2">Primeira vez em Dubai?</p>
+                  <h3 className="font-bold text-navy text-xl mb-2 flex items-center gap-2">
+                    <span className="text-gold">✦</span> Primeira vez em Dubai?
+                  </h3>
                   <p>Ela te guia pelos clássicos sem cair em armadilha de turista.</p>
                 </div>
                 <div>
-                  <p className="font-bold text-navy mb-2">Já conhece a cidade?</p>
+                   <h3 className="font-bold text-navy text-xl mb-2 flex items-center gap-2">
+                    <span className="text-gold">✦</span> Já conhece a cidade?
+                  </h3>
                   <p>Ela foge do óbvio e te leva pros lugares que só quem mora lá sabe.</p>
                 </div>
               </div>
 
-              <p className="leading-relaxed">
-                Quer trocar o jantar do dia 3 por um japonês? É só pedir. Quer saber se vale subir no Burj Khalifa ou se o Sky Views é melhor? Ela te conta a real.
-              </p>
+              <div className="space-y-4">
+                <p>
+                  <strong>Flexibilidade Total:</strong> Quer trocar o jantar do dia 3 por um japonês? É só pedir.
+                </p>
+                <p>
+                  <strong>Sem Dúvidas:</strong> Quer saber se vale subir no Burj Khalifa ou se o Sky Views é melhor? Ela te conta a real.
+                </p>
+                <p>
+                  <strong>Concierge de Bolso:</strong> E quando você chegar em Dubai, a Nora continua com você. Te indica lugares baseado em onde você está, manda foto de qualquer local e ela cria um audioguia na hora, e te avisa em tempo real sobre eventos exclusivos que não estão em nenhum blog.
+                </p>
+              </div>
               
-              <p className="leading-relaxed">
-                E quando você chegar em Dubai, a Nora continua com você — te indica lugares baseado em onde você está, <strong className="text-navy">manda foto de qualquer local e ela cria um audioguia na hora</strong>, e te avisa em tempo real sobre eventos exclusivos que não estão em nenhum blog.
-              </p>
-              
-              <div className="text-center pt-8">
+              <div className="pt-4 border-t border-sand/40">
                  <p className="font-serif italic text-navy text-2xl">
                   "Dubai do jeito que deveria ser: sem pesquisa, sem dúvida, só experiência."
                 </p>
               </div>
             </div>
+
+            {/* Static Chat Demo (No Interaction) */}
+            <div className="w-full">
+              <ChatDemo />
+            </div>
+
           </div>
 
           {/* CTA Button */}
