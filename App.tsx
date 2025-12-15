@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Check, MapPin, BadgeCheck, ShieldCheck, Zap, 
   Map, Camera, Sparkles, RefreshCw, Wallet, ShieldAlert, 
-  Coins, UserCheck, Plane, Image as ImageIcon, CalendarClock, Palmtree,
+  Coins, Plane, CalendarClock, Palmtree,
   Umbrella, Utensils, Ticket, ShoppingBag, Music
 } from 'lucide-react';
 import ChatDemo from './components/ChatDemo';
@@ -181,9 +181,9 @@ function App() {
       icon: Sparkles 
     },
     { 
-      title: "Ajuste Dinâmico", 
-      desc: "Mudou de ideia? Quer trocar o jantar italiano por japonês agora? É só pedir no WhatsApp.", 
-      icon: RefreshCw 
+      title: "Passagens Aéreas", 
+      desc: "Dicas de ouro de quem vive na aviação para você encontrar os melhores voos e assentos.", 
+      icon: Plane 
     },
     { 
       title: "Economia Inteligente", 
@@ -199,21 +199,6 @@ function App() {
       title: "Câmbio & Clima na Hora", 
       desc: "Cotação atualizada do Dirham e previsão do tempo pro seu período de viagem.", 
       icon: Coins 
-    },
-    { 
-      title: "Perfil sob Medida", 
-      desc: "Primeira vez? Roteiro clássico. Já conhece Dubai? Ela foge do óbvio e te leva pros hidden gems.", 
-      icon: UserCheck 
-    },
-    { 
-      title: "Passagens Aéreas", 
-      desc: "Pede voos saindo da sua cidade e ela já manda o link direto pro Google Flights.", 
-      icon: Plane 
-    },
-    { 
-      title: "Fotos Antes de Ir", 
-      desc: "Quer ver como é o restaurante antes de reservar? Ela manda foto do lugar.", 
-      icon: ImageIcon 
     },
     { 
       title: "Reservas Obrigatórias", 
@@ -246,7 +231,7 @@ function App() {
         <div className="absolute inset-0 opacity-5 pointer-events-none z-0" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 25H55L39 37L45 57L30 45L15 57L21 37L5 25H25L30 5Z' fill='none' stroke='%23D4AF37' stroke-width='0.5'/%3E%3C/svg%3E")` }}></div>
         
         <div className="container mx-auto max-w-6xl relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             
             {/* Hero Text */}
             <div className="text-left space-y-8 animate-fade-in-up">
