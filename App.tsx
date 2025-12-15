@@ -118,11 +118,12 @@ function App() {
   const plans: PricingPlan[] = [
     {
       name: PricingTier.ONE_MONTH,
-      price: "R$ 177",
+      price: "R$ 147",
       period: "/acesso",
       description: "Acesso total por 30 dias. O essencial para aproveitar suas férias sem estresse.",
       ctaText: "Começar Agora",
       isPopular: true,
+      link: "https://buy.stripe.com/cNi6oB7IZ02l8EIg6Z0oM00",
       features: [
         "Sem instalar nada, acesso direto e leve",
         "Atualizações automáticas inclusas",
@@ -137,6 +138,7 @@ function App() {
       description: "Para quem vive a cidade e quer descobrir as novidades antes de todo mundo.",
       ctaText: "Assinar Semestral",
       bgColor: "bg-sand-dark",
+      link: "https://buy.stripe.com/cNi7sFd3jcP708c3kd0oM01",
       features: [
         "Sem instalar nada, acesso direto e leve",
         "Atualizações automáticas inclusas",
@@ -313,7 +315,7 @@ function App() {
                   <strong>Flexibilidade Total:</strong> Quer trocar o jantar do dia 3 por um japonês? É só pedir.
                 </p>
                 <p>
-                  <strong>Sem Dúvidas:</strong> Quer saber se vale subir no Burj Khalifa ou se o Sky Views é melhor? Ela te conta a real.
+                  <strong>Sem Dúvidas:</strong> Quer saber se vale subir no Burj Khalifa ou se a vista do Sky Views é melhor? Ela te conta a real.
                 </p>
                 <p>
                   <strong>Concierge de Bolso:</strong> E quando você chegar em Dubai, a Nora continua com você. Te indica lugares baseado em onde você está, manda foto de qualquer local e ela cria um audioguia na hora, e te avisa em tempo real sobre eventos exclusivos que não estão em nenhum blog.
@@ -472,12 +474,23 @@ function App() {
                   ))}
                 </ul>
 
-                <Button 
-                  fullWidth 
-                  variant={plan.isPopular ? 'primary' : (plan.bgColor === 'bg-navy' ? 'dark' : 'secondary')}
-                >
-                  {plan.ctaText}
-                </Button>
+                {plan.link ? (
+                  <a href={plan.link} target="_blank" rel="noopener noreferrer" className="block w-full">
+                    <Button 
+                      fullWidth 
+                      variant={plan.isPopular ? 'primary' : (plan.bgColor === 'bg-navy' ? 'dark' : 'secondary')}
+                    >
+                      {plan.ctaText}
+                    </Button>
+                  </a>
+                ) : (
+                  <Button 
+                    fullWidth 
+                    variant={plan.isPopular ? 'primary' : (plan.bgColor === 'bg-navy' ? 'dark' : 'secondary')}
+                  >
+                    {plan.ctaText}
+                  </Button>
+                )}
               </div>
             ))}
           </div>

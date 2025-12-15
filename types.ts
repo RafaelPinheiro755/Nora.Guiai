@@ -19,4 +19,5 @@ export interface PricingPlan {
   isPopular?: boolean;
   ctaText: string;
   bgColor?: string; // Optional custom bg class
+  link?: string;
 }
