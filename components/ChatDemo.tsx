@@ -51,14 +51,14 @@ const INITIAL_MESSAGES: Message[] = [
 ];
 
 const ChatDemo: React.FC = () => {
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    scrollToBottom();
+    // Sets the scroll position of the container to the bottom immediately on mount
+    // Does NOT use scrollIntoView() to avoid hijacking the window scroll
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
   }, []);
 
   return (
@@ -77,7 +77,10 @@ const ChatDemo: React.FC = () => {
       </div>
 
       {/* Messages Area - Static */}
-      <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 scrollbar-thin scrollbar-thumb-sand scrollbar-track-transparent bg-gray-50/50">
+      <div 
+        ref={scrollRef}
+        className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 scrollbar-thin scrollbar-thumb-sand scrollbar-track-transparent bg-gray-50/50"
+      >
         {INITIAL_MESSAGES.map((msg) => (
           <div 
             key={msg.id} 
@@ -108,7 +111,6 @@ const ChatDemo: React.FC = () => {
             </div>
           </div>
         ))}
-        <div ref={messagesEndRef} />
       </div>
     </div>
   );
