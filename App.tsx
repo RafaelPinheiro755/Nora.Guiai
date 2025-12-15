@@ -153,6 +153,7 @@ function App() {
       description: "Soluções personalizadas para executivos, tripulações e delegações.",
       ctaText: "Falar com Consultor",
       bgColor: "bg-navy",
+      link: "https://wa.me/5531991764289?text=Ola+eu+gostaria+de+saber+mais+sobre+o+plano+empresarial+da+Nora",
       features: [
         "Sem instalar nada, acesso direto e leve",
         "Atualizações automáticas inclusas",
