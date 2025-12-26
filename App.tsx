@@ -118,11 +118,11 @@ function App() {
   const plans: PricingPlan[] = [
     {
       name: PricingTier.ONE_MONTH,
-      price: "R$ 147",
+      price: "R$ 127",
       period: "/acesso",
       description: "Acesso total por 30 dias. O essencial para aproveitar suas férias sem estresse.",
-      ctaText: "Começar Agora",
-      isPopular: true,
+      ctaText: "Assinar Agora",
+      isPopular: false,
       link: "https://buy.stripe.com/cNi6oB7IZ02l8EIg6Z0oM00",
       features: [
         "Sem instalar nada, acesso direto e leve",
@@ -136,7 +136,7 @@ function App() {
       price: "R$ 347",
       period: "/semestre",
       description: "Para quem vive a cidade e quer descobrir as novidades antes de todo mundo.",
-      ctaText: "Assinar Semestral",
+      ctaText: "Assinar Agora",
       bgColor: "bg-sand-dark",
       link: "https://buy.stripe.com/cNi7sFd3jcP708c3kd0oM01",
       features: [
@@ -425,23 +425,12 @@ function App() {
             <p className="text-sepia">Acesso imediato via WhatsApp</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
             {plans.map((plan) => (
               <div 
                 key={plan.name}
-                className={`w-full rounded-[2rem] p-8 relative transition-transform duration-300 hover:-translate-y-2
-                  ${plan.isPopular 
-                    ? 'bg-white border-2 border-gold shadow-2xl z-10 scale-105' 
-                    : 'bg-white border border-sand/50 shadow-xl'
-                  }
-                `}
+                className="w-full rounded-[2rem] p-8 relative transition-transform duration-300 hover:-translate-y-2 bg-white border border-sand/50 shadow-xl flex flex-col"
               >
-                {plan.isPopular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-white px-6 py-1 rounded-full text-sm font-bold uppercase tracking-wide shadow-lg">
-                    Mais Escolhido
-                  </div>
-                )}
-
                 <h3 className="font-serif text-2xl text-navy mb-2">{plan.name}</h3>
                 <div className="flex items-baseline gap-1 mb-4">
                   <span className="text-4xl font-bold text-navy">{plan.price}</span>
@@ -451,7 +440,7 @@ function App() {
                   {plan.description}
                 </p>
 
-                <ul className="space-y-4 mb-8">
+                <ul className="space-y-4 mb-8 flex-1">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-sm text-navy/80">
                       <Check size={18} className="text-gold shrink-0 mt-0.5" />
@@ -464,7 +453,7 @@ function App() {
                   <a href={plan.link} target="_blank" rel="noopener noreferrer" className="block w-full">
                     <Button 
                       fullWidth 
-                      variant={plan.isPopular ? 'primary' : (plan.bgColor === 'bg-navy' ? 'dark' : 'secondary')}
+                      variant={plan.bgColor === 'bg-navy' ? 'dark' : 'primary'}
                     >
                       {plan.ctaText}
                     </Button>
@@ -472,7 +461,7 @@ function App() {
                 ) : (
                   <Button 
                     fullWidth 
-                    variant={plan.isPopular ? 'primary' : (plan.bgColor === 'bg-navy' ? 'dark' : 'secondary')}
+                    variant={plan.bgColor === 'bg-navy' ? 'dark' : 'primary'}
                   >
                     {plan.ctaText}
                   </Button>
