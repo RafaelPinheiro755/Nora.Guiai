@@ -26,7 +26,7 @@ const PreCheckoutForm: React.FC<PreCheckoutFormProps> = ({ onBack, checkoutUrl }
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Use the provided checkoutUrl prop or fall back to the default
-    const finalUrl = checkoutUrl || "https://mpago.la/1yMVHe8";
+    const finalUrl = checkoutUrl || "https://mpago.li/2s13avr";
     window.location.href = finalUrl;
   };
 

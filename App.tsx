@@ -126,7 +126,7 @@ function App() {
       description: "Acesso total por 30 dias. O essencial para aproveitar suas férias sem estresse.",
       ctaText: "Assinar Agora",
       isPopular: false,
-      link: "https://mpago.la/1yMVHe8",
+      link: "https://mpago.li/2s13avr",
       features: [
         "Sem instalar nada, acesso direto e leve",
         "Atualizações automáticas inclusas",
@@ -224,7 +224,7 @@ function App() {
       if (plan.link) window.open(plan.link, '_blank');
       return;
     }
-    setSelectedCheckoutUrl(plan.link || 'https://mpago.la/1yMVHe8');
+    setSelectedCheckoutUrl(plan.link || 'https://mpago.li/2s13avr');
     setShowCheckout(true);
   };
 
