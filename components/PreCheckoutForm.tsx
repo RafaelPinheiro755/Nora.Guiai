@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Mail, MessageSquare, ArrowRight, ArrowLeft, ShieldCheck, Info } from 'lucide-react';
+import { User, Mail, MessageSquare, ArrowRight, ArrowLeft, ShieldCheck, Info, AlertCircle } from 'lucide-react';
 import Button from './Button';
 
 interface PreCheckoutFormProps {
@@ -13,19 +13,63 @@ const PreCheckoutForm: React.FC<PreCheckoutFormProps> = ({ onBack, checkoutUrl }
     email: '',
     whatsapp: ''
   });
+  const [error, setError] = useState<string | null>(null);
 
   const handleWhatsAppChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\D/g, "");
+    
+    // Brazilian mobile format: (XX) 9XXXX-XXXX
     if (value.length <= 11) {
-      value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
-      value = value.replace(/(\d)(\d{4})$/, "$1-$2");
+      if (value.length > 2) {
+        value = `(${value.substring(0, 2)}) ${value.substring(2)}`;
+      }
+      if (value.length > 9) {
+        value = `${value.substring(0, 10)}-${value.substring(10)}`;
+      }
+    } else {
+      value = value.substring(0, 11);
+      value = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7, 11)}`;
     }
+    
     setFormData({ ...formData, whatsapp: value });
+    if (error) setError(null);
+  };
+
+  const validateEmail = (email: string) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Use the provided checkoutUrl prop or fall back to the default
+    const rawPhone = formData.whatsapp.replace(/\D/g, "");
+    
+    // Basic validation
+    if (!formData.nome.trim()) {
+      setError("Por favor, insira seu nome completo.");
+      return;
+    }
+
+    if (!validateEmail(formData.email)) {
+      setError("Por favor, insira um e-mail válido.");
+      return;
+    }
+
+    // Brazilian mobile check: must have 11 digits and start with 9
+    if (rawPhone.length !== 11) {
+      setError("O WhatsApp deve ter 11 dígitos (DDD + Número).");
+      return;
+    }
+
+    if (rawPhone[2] !== '9') {
+      setError("Por favor, insira um número de celular válido (iniciando com 9).");
+      return;
+    }
+
+    // All valid
     const finalUrl = checkoutUrl || "https://mpago.li/2s13avr";
     window.location.href = finalUrl;
   };
@@ -52,9 +96,17 @@ const PreCheckoutForm: React.FC<PreCheckoutFormProps> = ({ onBack, checkoutUrl }
           <p className="text-sand/80 text-sm">Após o pagamento, você receberá a Nora direto no seu WhatsApp</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-8 md:p-10 space-y-8">
+        <form onSubmit={handleSubmit} className="p-8 md:p-10 space-y-6">
+          {/* General Error Message */}
+          {error && (
+            <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-md flex items-center gap-3 animate-shake">
+              <AlertCircle className="text-red-500 shrink-0" size={18} />
+              <p className="text-xs text-red-700 font-medium">{error}</p>
+            </div>
+          )}
+
           {/* Nome Input */}
-          <div className="space-y-2">
+          <div className="space-y-1">
             <label className="text-[10px] uppercase tracking-widest font-bold text-navy/40 ml-1">Nome Completo</label>
             <div className="relative group">
               <User className="absolute left-4 top-1/2 -translate-y-1/2 text-sand-dark group-focus-within:text-gold transition-colors" size={18} />
@@ -64,13 +116,16 @@ const PreCheckoutForm: React.FC<PreCheckoutFormProps> = ({ onBack, checkoutUrl }
                 placeholder="Seu nome"
                 className="w-full bg-sand/10 border-b-2 border-sand/30 py-4 pl-12 pr-4 rounded-t-xl focus:outline-none focus:border-gold focus:bg-white transition-all text-navy placeholder:text-navy/20"
                 value={formData.nome}
-                onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
+                onChange={(e) => {
+                  setFormData({ ...formData, nome: e.target.value });
+                  if (error) setError(null);
+                }}
               />
             </div>
           </div>
 
           {/* Email Input */}
-          <div className="space-y-2">
+          <div className="space-y-1">
             <label className="text-[10px] uppercase tracking-widest font-bold text-navy/40 ml-1">Seu melhor E-mail</label>
             <div className="relative group">
               <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-sand-dark group-focus-within:text-gold transition-colors" size={18} />
@@ -80,7 +135,10 @@ const PreCheckoutForm: React.FC<PreCheckoutFormProps> = ({ onBack, checkoutUrl }
                 placeholder="seu@email.com"
                 className="w-full bg-sand/10 border-b-2 border-sand/30 py-4 pl-12 pr-4 rounded-t-xl focus:outline-none focus:border-gold focus:bg-white transition-all text-navy placeholder:text-navy/20"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) => {
+                  setFormData({ ...formData, email: e.target.value });
+                  if (error) setError(null);
+                }}
               />
             </div>
             <div className="flex gap-2 items-start mt-2 px-1">
@@ -92,7 +150,7 @@ const PreCheckoutForm: React.FC<PreCheckoutFormProps> = ({ onBack, checkoutUrl }
           </div>
 
           {/* WhatsApp Input */}
-          <div className="space-y-2">
+          <div className="space-y-1">
             <label className="text-[10px] uppercase tracking-widest font-bold text-navy/40 ml-1">WhatsApp com DDD</label>
             <div className="relative group">
               <MessageSquare className="absolute left-4 top-1/2 -translate-y-1/2 text-sand-dark group-focus-within:text-gold transition-colors" size={18} />
