@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import ChatDemo from './components/ChatDemo';
 import Button from './components/Button';
+import PreCheckoutForm from './components/PreCheckoutForm';
 import { PricingTier, PricingPlan } from './types';
 
 // Helper component for the Phone Image to avoid duplication across mobile/desktop layouts
@@ -58,6 +59,8 @@ const HeroPhone = ({ tip1, tip2, className = "" }: { tip1: any, tip2: any, class
 
 function App() {
   const [activeTipIndex, setActiveTipIndex] = useState(0);
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [selectedCheckoutUrl, setSelectedCheckoutUrl] = useState('');
 
   const heroTips = [
     {
@@ -123,7 +126,7 @@ function App() {
       description: "Acesso total por 30 dias. O essencial para aproveitar suas férias sem estresse.",
       ctaText: "Assinar Agora",
       isPopular: false,
-      link: "https://buy.stripe.com/cNi6oB7IZ02l8EIg6Z0oM00",
+      link: "https://mpago.la/1yMVHe8",
       features: [
         "Sem instalar nada, acesso direto e leve",
         "Atualizações automáticas inclusas",
@@ -138,7 +141,7 @@ function App() {
       description: "Para quem vive a cidade e quer descobrir as novidades antes de todo mundo.",
       ctaText: "Assinar Agora",
       bgColor: "bg-sand-dark",
-      link: "https://buy.stripe.com/cNi7sFd3jcP708c3kd0oM01",
+      link: "https://mpago.la/31ZMJhT",
       features: [
         "Sem instalar nada, acesso direto e leve",
         "Atualizações automáticas inclusas",
@@ -211,6 +214,19 @@ function App() {
       icon: Palmtree 
     }
   ];
+
+  if (showCheckout) {
+    return <PreCheckoutForm onBack={() => setShowCheckout(false)} checkoutUrl={selectedCheckoutUrl} />;
+  }
+
+  const handlePlanClick = (plan: PricingPlan) => {
+    if (plan.name === PricingTier.ENTERPRISE) {
+      if (plan.link) window.open(plan.link, '_blank');
+      return;
+    }
+    setSelectedCheckoutUrl(plan.link || 'https://mpago.la/1yMVHe8');
+    setShowCheckout(true);
+  };
 
   return (
     <div className="font-sans text-navy bg-cream min-h-screen selection:bg-gold selection:text-white relative">
@@ -449,23 +465,13 @@ function App() {
                   ))}
                 </ul>
 
-                {plan.link ? (
-                  <a href={plan.link} target="_blank" rel="noopener noreferrer" className="block w-full">
-                    <Button 
-                      fullWidth 
-                      variant={plan.bgColor === 'bg-navy' ? 'dark' : 'primary'}
-                    >
-                      {plan.ctaText}
-                    </Button>
-                  </a>
-                ) : (
-                  <Button 
-                    fullWidth 
-                    variant={plan.bgColor === 'bg-navy' ? 'dark' : 'primary'}
-                  >
-                    {plan.ctaText}
-                  </Button>
-                )}
+                <Button 
+                  fullWidth 
+                  variant={plan.bgColor === 'bg-navy' ? 'dark' : 'primary'}
+                  onClick={() => handlePlanClick(plan)}
+                >
+                  {plan.ctaText}
+                </Button>
               </div>
             ))}
           </div>
